@@ -1,0 +1,54 @@
+================================================================================
+CLUSTER DYNAMICS ANALYSIS - GUIDE
+================================================================================
+Analysis Date: 2026-01-03
+Input file: global.30
+Timesteps: 801
+Time range: 0.00 - 9.36 Myr
+
+================================================================================
+FIGURE DESCRIPTIONS
+================================================================================
+
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+
+Time Evolution:
+- Duration: 9.36 Myr
+- Timesteps: 801
+
+Energy:
+- Initial BE: -2.039502e-01
+- Final BE: -1.726868e-01
+- Energy error: 4.170536e-09
+- Relative error: 2.415087e-06%
+
+Structure:
+- Initial Rc: 0.4111 pc
+- Final Rc: 0.4882 pc
+- Initial Rtide: 50.83 pc
+- Final Rtide: 49.69 pc
+
+Density:
+- Initial core: 9.41e+04 M☉/pc³
+- Final core: 9.90e+03 M☉/pc³
+- Density change: -89.5%
+
+Stellar Population:
+- Initial N: 50000
+- Final N: 49992
+- Stars lost: 8 (0.0%)
+- Escaped: 2100
+- Binary fraction: 0.00%
+
+Dynamics:
+- Initial VRMS: 7.934 km/s
+- Final VRMS: 6.164 km/s
+- Crossing time: 0.756 Myr
+
+
+================================================================================
+END OF GUIDE
+================================================================================
