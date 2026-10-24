@@ -13,11 +13,13 @@ definitions supersede them.
 | S2 | Isolated recycled MSP | Single NS that was recycled in a binary and lost its companion | MSPs with τ_c of order Gyr | weak dipole, field decay | Single now; in a binary before; accretion flag set by S3; mass gain > 0.01 M☉ |
 | S3 | Accretion-recycled MSP (LMXB, RLOF) | Evolving donor fills its Roche lobe; NS spun up while the field is buried | From normal pulsars to MSPs; Ṗ < 0 while accreting | accretion, dipole | Mass gain rate > 10⁻¹⁰; donor type 2–9; a < 10¹¹; donor radius above the Roche-lobe radius (Eggleton 1983) |
 | S4 | Exchange MSP | NS acquires a new companion in an encounter in the core | Unchanged at the exchange; prepares later recycling | dynamical, environmental, dipole | Single before or new companion; large change of E_bind or of companion type; `STEP` < 10⁻⁶; inside the core radius |
-| S5 | Wide binary | Detached binary without mass transfer | As S1 or S2 | dipole, environmental | a > `ATHRESH` = 0.1 pc; no mass gain; companion MS, WD, NS, or BH |
+| S5 | Wide binary | Detached binary without mass transfer | As S1 or S2 | dipole, environmental | a > `ATHRESH` (intended 0.1 pc; zero in Runs 2–4); no mass gain; companion MS, WD, NS, or BH |
 | S6 | NS–NS binary | Double NS; orbital decay by GW emission (deferred) | As S1 or S2 | dipole, merger | NS companion; imminent merger or mass change > 0.3 M₀ |
 | S7 | NS–BH binary | NS with a BH companion; faster GW decay than S6 (deferred) | As S1 or S2 | dipole, merger | BH companion; capture, mass change > 0.5 M₀, or speed > 500 km s⁻¹ |
 
-Thresholds without units are in the mixed units of the code. The code tests the scenarios in the order
+Thresholds without units are in the mixed units of the code. In Runs 2–4 the coefficients and `ATHRESH` are never
+initialised (see [MODULE_REVIEW.md](MODULE_REVIEW.md), item 0), so only dipole braking acts and S5 needs only a
+positive separation. The code tests the scenarios in the order
 S6, S7, S3, S4, S5, S2; S1 is the default. How the code identifies the companion, and why the S5 and S7
 labels of Run 4 do not mark bound companions, is described in [MODULE_REVIEW.md](MODULE_REVIEW.md).
 
@@ -48,9 +50,9 @@ labels of Run 4 do not mark bound companions, is described in [MODULE_REVIEW.md]
   tables name it accordingly. The reference definition returns to the exchange itself. An exchange changes the
   companion, not the spin, so in the next version S4 marks the configuration (a change of the companion's
   identity in a regularised pair) and any spin-up comes from the S3 physics that may follow.
-- **S5** used separations of 10–100 au (ComBAO II) and 3 au (RAA), whereas the code requires more than 0.1 pc
-  (about 2 × 10⁴ au), far beyond the hard–soft boundary of a cluster. The next version sets the threshold
-  relative to that boundary.
+- **S5** used separations of 10–100 au (ComBAO II) and 3 au (RAA), whereas the code is meant to require more than
+  0.1 pc (about 2 × 10⁴ au), far beyond the hard–soft boundary of a cluster; in Runs 2–4 the threshold is zero
+  because it is never initialised. The next version sets the threshold relative to that boundary.
 - **S6, S7** were framed as mergers (ComBAO II, code) and then as compact binaries in which only dipole braking is
   followed and GW-driven orbital decay is deferred (RAA, Springer). The reference names describe the binaries.
   The code version of Run 4 also assigns S7 for speeds above 500 km s⁻¹, a criterion unrelated to a BH

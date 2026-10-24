@@ -2,7 +2,10 @@
 
 Every number is read from the archived run outputs:
   Runs 2-4: pulsar.55_*.dat files (20 columns), deduplicated by (t, NAME)
-  Run 1   : GLOBAL/SEV GUIDE.txt summaries (no pulsar.55 records, no NS)
+  Run 1   : GLOBAL/SEV GUIDE.txt summaries and its log (no pulsar.55 records, no NS)
+  Run 4   : data/run4/host_neutron_stars.csv (host log and esc.11) for the NS that is
+            formed and removed between two outputs
+End times: END RUN lines of the logs (9.14 Myr for Run 1, 28.13 Myr for Runs 2-4).
 """
 import glob, os, sys
 import numpy as np
@@ -46,7 +49,16 @@ assert set(R["run2"]["rec"]) == set(R["run4"]["rec"])
 
 # Run 1 (top-level version) from its GUIDE summaries
 RUN1 = dict(N=50000, t_end=9.14, n_ns=0)
-T_END_5K = 28.13                         # Runs 2-4, GLOBAL GUIDE of Run 2
+T_END_5K = 28.13                         # Runs 2-4, END RUN line of the logs (Run 3 included)
+
+# neutron stars formed by the host but never recorded by the module
+UNSEEN = []
+for line in open(os.path.join(ROOT, "data", "run4", "host_neutron_stars.csv")):
+    if line.startswith("#") or line.startswith("NAME"):
+        continue
+    v = line.strip().split(",")
+    if v[6] == "":
+        UNSEEN.append((int(v[0]), float(v[1]), float(v[7])))
 
 a4 = np.array(list(R["run4"]["rec"].values()))
 ns_ids = sorted(set(a4[:, 1].astype(int)))
@@ -82,13 +94,7 @@ ax.axvspan(min(w[0] for w in win.values()), max(w[1] for w in win.values()),
            color="#f3efe3", zorder=0)
 for run, y in ys.items():
     tend = RUN1["t_end"] if run == "run1" else T_END_5K
-    if run == "run3":   # end time not in the archive: solid to last record
-        tlast = max(k[0] for k in R["run3"]["rec"])
-        ax.barh(y, tlast, height=0.42, color=RUNC[run], zorder=2)
-        ax.barh(y, tend - tlast, left=tlast, height=0.42, color="white",
-                edgecolor=RUNC[run], hatch="....", linewidth=0.6, zorder=2)
-    else:
-        ax.barh(y, tend, height=0.42, color=RUNC[run], zorder=2)
+    ax.barh(y, tend, height=0.42, color=RUNC[run], zorder=2)
 ax.set_yticks([3, 2, 1, 0])
 ax.set_yticklabels(["Run 1\nN = 50 000", "Run 2\nN = 5 000",
                     "Run 3\nN = 5 000", "Run 4\nN = 5 000"], color=INK)
@@ -98,17 +104,25 @@ ax.text(RUN1["t_end"] + 0.35, 3, "stops at 9.14 Myr, before any neutron star for
 for run, y in [("run2", 2), ("run3", 1), ("run4", 0)]:
     ax.text(T_END_5K + 0.35, y, f"{len(R[run]['rec'])} records",
             va="center", color=INK2, fontsize=7)
-# per-NS tracked windows: one lane per NS, ordered by first record
-for i, n in enumerate(sorted(ns_ids, key=lambda k: win[k][0])):
-    t0, t1 = win[n]
+# per-NS tracked windows: one lane per NS, ordered by first record (formation for
+# an NS that is never recorded)
+lanes = [(win[n][0], n, "rec") for n in ns_ids] + [(t, n, "unseen") for n, t, _ in UNSEEN]
+for i, (t0, n, kind) in enumerate(sorted(lanes)):
     yk = 3.55 + 0.2 * i
-    ax.plot([t0, max(t1, t0 + 0.06)], [yk, yk], color=INK, lw=1.6,
-            solid_capstyle="butt", zorder=3)
-    ax.text(max(t1, t0 + 0.06) + 0.25, yk, f"NS {n}", ha="left",
-            va="center", fontsize=5.8, color=INK2)
-ax.text(14.6, 4.45, "interval in which each\nneutron star is recorded", ha="right",
+    if kind == "rec":
+        t1 = win[n][1]
+        ax.plot([t0, max(t1, t0 + 0.06)], [yk, yk], color=INK, lw=1.6,
+                solid_capstyle="butt", zorder=3)
+        ax.text(max(t1, t0 + 0.06) + 0.25, yk, f"NS {n}", ha="left",
+                va="center", fontsize=5.8, color=INK2)
+    else:
+        ax.plot([t0], [yk], marker="o", ms=3.2, mfc="white", mec=INK, mew=0.8,
+                zorder=3)
+        ax.text(t0 - 0.3, yk, f"NS {n}, not recorded", ha="right",
+                va="center", fontsize=5.8, color=INK2)
+ax.text(14.6, 4.55, "interval in which each\nneutron star is recorded", ha="right",
         va="center", fontsize=6.5, color=INK2)
-ax.set_xlim(0, 33.5); ax.set_ylim(-0.5, 5.55)
+ax.set_xlim(0, 33.5); ax.set_ylim(-0.5, 5.75)
 ax.set_xlabel("Physical time $t$ (Myr)")
 for s in ["top", "right", "left"]:
     ax.spines[s].set_visible(False)

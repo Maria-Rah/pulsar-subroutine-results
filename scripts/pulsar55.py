@@ -2,8 +2,8 @@
 
 Each line of pulsar.55_XXXXXXXX.dat holds 20 columns (see docs/PULSAR55_FORMAT.md).
 Lines that cannot be parsed are counted and skipped. A record is identified by
-(time, NAME); in Run 4 every record appears up to four times with identical
-content, so duplicates are removed.
+(time, NAME); every MPI process of the host writes its own copy of each line
+(twice in Run 2, up to four times in Run 4), so duplicates are removed.
 """
 import glob
 import os

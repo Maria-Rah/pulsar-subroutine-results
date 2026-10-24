@@ -27,18 +27,25 @@ its dynamical state, and (ii) the classification of every NS at every output int
 
 ## What the four runs show
 
-| Run | N | Time covered | Neutron stars | Module output |
+| Run | N | Time covered | Neutron stars (formed / recorded) | Module output |
 |---|---|---|---|---|
-| 1 | 50 000 | 0–9.14 Myr | none formed | – |
-| 2 | 5000 | 0–28.13 Myr | 10 | P drawn, Ṗ = B = 0, P undefined in 27% of records |
-| 3 | 5000 | 0 to ≥ 27.39 Myr | 10 | Ṗ falls by ~4 × 10¹⁶ per output (c mismatch) |
-| 4 | 5000 | 0–28.13 Myr | 10 | 286 finite records |
+| 1 | 50 000 | 0–9.14 Myr | 0 / 0 | – |
+| 2 | 5000 | 0–28.13 Myr | 11 / 10 | P drawn, Ṗ = B = 0, P undefined in 27% of records |
+| 3 | 5000 | 0–28.13 Myr | 11 / 10 | Ṗ falls by ~4 × 10¹⁶ per output (c mismatch) |
+| 4 | 5000 | 0–28.13 Myr | 11 / 10 | 286 finite records |
 
+- Both models are Plummer spheres (length scale 1.223 pc, Kroupa 2001 mass function from 0.08 to 150 M☉) in the
+  field of a point-mass galaxy; the end time and output interval are 80 and 0.1 N-body time units. The full set-up
+  is in [docs/RUNS.md](docs/RUNS.md) and the input files in [data/inputs](data/inputs).
+- The primordial binaries of both models dissolve at the start (relative energy error 0.15 in the first adjustment
+  interval of Runs 2–4), so the runs contain no binaries.
 - The module does not feed back on the host: positions, velocities, forces, energies, stellar types, and labels
-  are bit-identical in Runs 2–4.
-- The ten NSs of Run 4 form between 15.0 and 27.4 Myr with speeds of 19–516 km s⁻¹, far above the rms velocity
-  of 2.6 km s⁻¹, and leave the cluster on straight paths within 2.3 Myr. None is retained, none has a bound
-  companion.
+  are bit-identical in Runs 2–4, and the escaper lists and Lagrangian radii of Runs 3 and 4 are identical.
+- The host forms eleven NSs in the 5000-star model between 15.0 and 27.3 Myr. The module records ten of them, whose
+  speeds of 19–516 km s⁻¹ are their natal kicks, far above the rms velocity of 2.6 km s⁻¹; the eleventh (NS 522)
+  forms beyond the tidal radius and is removed before the next call. All leave the cluster on straight paths within
+  2.4 Myr. None is retained, none has a bound companion.
+- In the module version of Runs 2–4 the coefficients are never initialised, so Ṗ is the dipole term alone.
 - Their recorded P (5.6–97.5 ms) and B (1.7–9.9 × 10⁸ G) lie in the ranges from which the module draws its
   initial values; P and Ṗ are unchanged in 258 of 276 intervals, and the remaining changes are transfers between
   stars or new draws, because the spin arrays follow the particle index. Labels S1, S5, and S7 are assigned; S5
@@ -50,16 +57,16 @@ its dynamical state, and (ii) the classification of every NS at every output int
 
 | Path | Content |
 |---|---|
-| [`docs/RUNS.md`](docs/RUNS.md) | Cluster models, module versions, what each run wrote, bit identity, the ten NSs |
+| [`docs/RUNS.md`](docs/RUNS.md) | Set-up, cluster models, what the host did, module versions, bit identity, the NSs |
 | [`docs/SCENARIOS.md`](docs/SCENARIOS.md) | Reference definitions of S1–S7 and the history of each label through the series |
 | [`docs/MODULE_REVIEW.md`](docs/MODULE_REVIEW.md) | Departures of the Run 4 module version from the physical model, with code lines |
-| [`docs/NEUTRON_STARS.md`](docs/NEUTRON_STARS.md) | Every NS of Run 4: label intervals, spin states, every change of state |
+| [`docs/NEUTRON_STARS.md`](docs/NEUTRON_STARS.md) | Every NS of Run 4: formation and removal, label intervals, spin states, every change of state |
 | [`docs/PULSAR55_FORMAT.md`](docs/PULSAR55_FORMAT.md) | Columns and units of the `pulsar.55` records |
 | [`figures/main/`](figures/main) | The five figures of the paper (PNG and PDF) |
 | [`figures/appendix/`](figures/appendix) | 20 tracking diagrams (FigA and FigB for each NS) and [their captions](figures/appendix/CAPTIONS.md) |
-| [`data/`](data) | `pulsar.55` files of Runs 2–4, Run 4 as CSV, host diagnostics summaries of Runs 1 and 2 |
+| [`data/`](data) | Input files, host log extracts and kick tables, `pulsar.55` files of Runs 2–4, Run 4 as CSV, formation and removal of the NSs, host diagnostics summaries of Runs 1 and 2 |
 | [`scripts/`](scripts) | Reader, number reproduction, figure scripts |
-| [`code/`](code) | The module source whose logic produced the Run 4 records |
+| [`code/`](code) | The module source compiled for Run 4, the `/PULSAR/` common block, and the changes to the host files |
 
 ## Reproducing the paper
 

@@ -2,7 +2,7 @@
 
 | File | Figure | Produced by |
 |---|---|---|
-| `Fig1_four_runs.*` | Fig. 1: the four runs (time covered, record status, recorded Ṗ and B, bit identity with Run 4) | `scripts/fig1_four_runs.py` |
+| `Fig1_four_runs.*` | Fig. 1: the four runs (time covered, record status, recorded Ṗ and B, bit identity with Run 4); the open circle in panel (a) marks NS 522, which forms and is removed between two outputs | `scripts/fig1_four_runs.py` |
 | `Fig2_PPdot_run4.*` | Fig. 2: P–Ṗ diagram of the 273 Run 4 records with Ṗ > 0 | `scripts/fig2_fig3_run4.py` |
 | `Fig3_PdotB_run4.*` | Fig. 3: Ṗ–B diagram of the same records | `scripts/fig2_fig3_run4.py` |
 | `Fig4_PPdot_atlas_run4.*` | Fig. 4: P–Ṗ panels of the ten NSs, ordered by group | `scripts/fig4_fig5_compose.py` |

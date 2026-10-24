@@ -1,0 +1,237 @@
+# Extract of the host log of Run 1 (N = 50 000), /extra2/mariarah/pulsar_50k_80Myr_run1/output_50k.log (55214 lines in total).
+# Sections: the first 150 lines (input echo, SSE/BSE parameters, mass function, scaling),
+# the adjustment line with the largest energy error, and the last 80 lines. Lines of the form
+# "Authorization required, but no authorization protocol specified" (X11 messages) are omitted.
+
+==== first 150 lines
+
+
+
+
+MPI-initial: This is rank=     1 size=     2 group=          2
+MPI-initial: This is rank=     0 size=     2 group=          2
+ RANK:            1  OpenMP Number of Threads:           16
+ RANK:            0  OpenMP Number of Threads:           16
+  MPI: iserreg,isernb,iserks,icore=         640         640           0          16
+  KSTART, TCOMP, TCRITP =           1   99999.000000000000        99999.000000000000     
+
+
+
+
+
+               N  NFIX  NCRIT  NRAND  NNBOPT  NRUN NCOMM
+
+           50000     1     10  43532      60     1    10
+
+
+             ETAI      ETAR      RS0       DTADJ     DELTAT     TCRITP    TCRIT     QE        RBAR       ZMBAR
+
+             1.0E-02   1.0E-02   1.5E-01   1.0E-01   1.0E-01   1.0E+05   8.0E+01   1.0E+00   1.2E+00   7.0E-01
+
+
+            OPTIONS
+
+           1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
+
+           1  1  1  0  1  0  3  2  3  2  0  1  0  2  2  0  0  0  3  6  1  1  2  0  2  2  1  2  0  2  1  0  2  2  1  0  1  1  2  1  0  0  0  0  0  4  3  0  3  0
+
+
+            DTMIN     RMIN      ETAU      ECLOSE    GMIN      GMAX     SMAX
+
+            2.5E-06   8.0E-05   1.0E-01   1.0E+00   1.0E-06   1.0E-02   1.0E+00
+
+  inbse: invalid Namelist format
+
+ SSE/BSE/Coll Level = B
+
+           SSE FLAGS: EC,WD,NS,PS,MD,BH=   1   1   3   0   3   2 KMECH=   1
+           MASSES: Chandra, NS0, NS1=   1.44D+00   1.80D+00   2.50D+00
+           WIND PARAMS: NETA, BWIND, FLBV=   5.00D-01   0.00D+00   1.50D+00
+           KICK PARAMS: DISP, ECSIG, WDSIG1,2,  WDKMAX, VFAC=   2.65D+02   3.00D+00   2.00D+00   2.00D+00   6.00D+00   0.00D+00
+
+           BSE PARAMS: LAMBDA, ALPHA=   5.00D-01   3.00D+00 BHSPINFL, KICKTYPE=   0  -2
+           K2,K3=   2.10D-01   2.10D-01 ACC1,2, BETA, XI=   3.92D+08   1.50D+00   1.25D-01   1.00D+00
+           EPSNOV, EDDFAC, GAMM1=   1.00D-03   1.00D+02  -1.00D+00
+
+           COLL PARAMS: FactorCl=   5.00D-01
+
+
+ The 5-part power-law MF:
+   ML      MH      M0      M1      M2      MU
+   0.010   0.080   0.500   1.000   8.000 160.000
+      ALPHA0  ALPHA1  ALPHA2  ALPHA3  ALPHA4
+      0.300   1.300   2.300   2.300   2.300
+
+ Number fractions for LM=  0.080, Msun, UM=150.000 Msun:
+  0.010 -  0.080 Msun: 0.0000
+  0.080 -  0.500 Msun: 0.7606
+  0.500 -  1.000 Msun: 0.1422
+  1.000 -  8.000 Msun: 0.0908
+  8.000 -160.000 Msun: 0.0064
+
+ Mass fractions for LM=  0.080, Msun, UM=150.000 Msun:
+  0.010 -  0.080 Msun: 0.0000
+  0.080 -  0.500 Msun: 0.2743
+  0.500 -  1.000 Msun: 0.1663
+  1.000 -  8.000 Msun: 0.3339
+  8.000 -160.000 Msun: 0.2255
+ Expected average stellar mass:   0.586 Msun
+
+
+
+            BINARY STAR IMF:    NB =  2500  RANGE =  1.32E+02  1.64E-01  <MB> = 1.21E+00
+
+            SINGLE STAR IMF:   NS =     47500  RANGE =  1.39E+02  8.00E-02  <MS> = 5.94E-01
+
+             ALPHAS =  2.35000E+00  BODY1 =  1.50000E+02  BODYN =  8.00000E-02 ZMASS =  5.00000E+04 NBIN0 =    2500 NHI0 =    0 ZMET =  1.00000E-03 EPOCH0 =  0.00000E+00 DTPLOT =  1.00000E+00
+  Start Energy Scale: N,NTOT,NPAIRS,IFIRST,GRAV        50000       52500        2500        5001   134.38973975653147     
+# GPU initialization - rank: 1; HOST chewbacca; NGPU 1; device: -1 
+# GPU initialization - rank: 0; HOST chewbacca; NGPU 1; device: -1 
+[R.1 GPU Pot.A] Ni 47500  NTOT 47500  pot(s) 0.148058
+[R.0 GPU Pot.A] Ni 47500  NTOT 47500  pot(s) 0.166929
+  Energies Absolute Scale    9431.4739235196448       0.56809307094817463       -3453.0982360574367     
+  Energies per mass    9431.4739235196448       0.56809307094817463       -3453.0982360574367     
+  Total Mass in Binaries   0.52230028738911727     
+
+
+            SCALING:   SX =  8.80137E-01  E = -2.84E-01  M(1) = 4.22E-03  M(N) = 2.56E-06  <M> = 2.00E-05  Q =   0.50000
+
+            TIME SCALES:   TRH = 8.9E+02  TCR = 2.8E+00  2<R>/<V> = 2.8E+00
+
+
+            PHYSICAL SCALING:    R* =   1.223000000000E+00  M* =   3.124289245639E+04  V* =   1.048194444497E+01  T* =   1.142943066758E-01  <M> =   6.248578491278E-01  SU =   5.426001013372E+07
+
+            GR SCALING:    V* =  1.05E+01  C =  2.86E+04  RZ =  1.46E-13
+
+             POINT-MASS MODEL (NB unit): MG =  5.69730E+06  RG =  1.33000E+01  OMEGA =  2.10473E-03  RTIDE =  4.22412E+01  RBAR =  1.22300E+00
+
+             TIDAL PARAMETERS:   1.32897E-05  0.00000E+00 -4.42989E-06  4.20946E-03  TSCALE =  1.14294E-01  RTIDE =  4.22020E+01
+
+
+
+            ABUNDANCES:  X = 0.757  Y = 0.242  Z = 0.0010
+
+            KTYPE:    0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15
+
+               0: |   1   1 102 103 104 105 106   4 106 106   3   6   6  13  14   0
+
+               1: |   1   1 102 103 104 105 106   4 106 106   3   6   6  13  14   0
+
+               2: | 102 102 103 103 104 104 105 104 104 104 103 105 105 113 114   3
+
+               3: | 103 103 103 103 104 104 105 104 104 104 103 105 105 113 114   0
+
+               4: | 104 104 104 104 104 104 104 104 104 104 104 104 104 113 114   0
+
+               5: | 105 105 104 104 104 104 104 104 104 104 104 104 104 113 114   0
+
+               6: | 106 106 105 105 104 104 106 104 106 106 105 106 106 113 114   0
+
+               7: |   4   4 104 104 104 104 104   7 108 109   7   9   9  13  14   0
+
+               8: | 106 106 104 104 104 104 106 108 108 109 107 109 109 113 114   0
+
+               9: | 106 106 104 104 104 104 106 109 109 109 107 109 109 113 114   0
+
+              10: |   3   3 103 103 104 104 105   7 107 107  15   9   9  13  14   0
+
+              11: |   6   6 105 105 104 104 106   9 109 109   9  12  12  13  14   0
+
+              12: |   6   6 105 105 104 104 106   9 109 109   9  12  12  13  14   0
+
+              13: |  13  13 113 113 113 113 113  13 113 113  13  13  13  14  14   0
+
+              14: |  14  14 114 114 114 114 114  14 114 114  14  14  14  14  14   0
+
+              15: |   1 102 103 104 105 106   4 106 106   3   6   6  13  14   0   0
+# Open GPU regular force - rank: 1; nbmax: 52510
+# Open GPU regular force - rank: 0; nbmax: 52510
+
+ Fpoly0 + Neighbor List Timing:        0.238542
+
+ Fpoly2 Timing:        5.462759
+
+==== largest energy error (line 15507 of the log)
+  ADJUST:  TIME    1.00000E-01  T[Myr]    0.01  Q 0.76  DE   1.233E-01 DELTA   4.191E-02 DETOT   4.191E-02 E  -1.089E-01 EKIN   3.400E-01 POT   4.489E-01 ETIDE  -3.780E-06 ETOT  -1.088E-01 EBIN   1.084E-04 EMERGE   0.000E+00 ESUB   0.000E+00 ECOLL   0.000E+00 EMDOT  -2.119E-07 ECDOT   0.000E+00
+
+==== last 80 lines
+
+        NMDOT NRG  NHE  NRS  NNH  NWD  NSN  NBH  NBS  ZMRG  ZMHE  ZMRS  ZMNH  ZMWD  ZMSN   ZMDOT  NTYPE
+ #4    34487    0   89   49   33    0    0   81    0   0.01540.3  21.1  28.6   0.0   0.0  2306.0  41022  8882   0   0   7   1   0   0   0   0   0    0      0      0     81
+
+      NDISS NTIDE  NSYNC  NCOLL  NCOAL  NDD  NCIRC  NROCHE  NRO  NCE  NHYP  NHYPC  NKICK  EBIN   EMERGE  ECOLL  EMDOT  ECDOT  EKICK  ESESC   EBESC  EMESC  DEGRAV   EBIND  MMAX
+ #5       0     0      0      0      0    0      0       0    0    0     0      0     37   0.000   0.000   0.000 -0.027 -0.001  0.000  0.000   0.000  0.000   0.000  -0.081  70.9
+ STEP I       42    1514    3009    2209    1725    2667    5264   13535   16446    2659     623     216      70      10       4
+ STEP R      878    5173    4260    6905   11161   12316    7662    1523     109       6
+ STEP U 
+ Max Speedup Irr:     4 3.99E+00    8 7.93E+00   16 1.56E+01   32 3.05E+01   64 5.77E+01  128 1.04E+02  256 1.72E+02  512 2.57E+02 1024 3.35E+02
+ Max Speedup Reg:     4 4.00E+00    8 7.99E+00   16 1.59E+01   32 3.17E+01   64 6.29E+01  128 1.23E+02  256 2.38E+02  512 4.42E+02 1024 7.70E+02
+ WD/NS/BH FORMATION T=  7.99512E+01 I,K,N,KW=       584   1      2572   5  14 AGE,AGE0=  0.00000E+00  9.16248E+00 Body, Mass [*]=  2.22601E+01  2.22601E+01 M0/1[*]  2.35680E+01  5.99929E+00 RAD[*]  9.8E+02 R,V=  3.4E-01  1.0E+00 RCC,MC=  2.5E-05  6.0E+00
+ NS/BH FORMATION FALLBACK TIME[NB] 7.9951171875E+01 NM=      2572 I=       584 KW,KW0=  14   5 TIME[Myr]=  9.13796E+00 M,M0[*]=  5.99929E+00  2.35680E+01 FB FBTOT VK[km/s] KMECH:  2.66510E-01 5.66588E+00 7.09013E+00   3
+ BH-SPIN: TIME[NB] 7.9951171875E+01 I       584  NAME      2572 KW   5 Time[Myr] 9.13796E+00 M[M*] 5.99929E+00  J[NB] J[MsRs^2/Myr] ASPIN  1.12737E-11 0.00000E+00 0.00000E+00
+ FULL VELOCITY KICK: TIME[NB] 7.9951171875E+01 I       584  NAME      2572 K*0   5  K*  14  K*(ICM)   0  Time[Myr] 9.13796E+00 M0[M*] 2.35680E+01 MN[M*] 5.99929E+00  VI[km/s] 3.51505E+00 VK[km/s] 7.09013E+00 VF[km/s] 6.47284E+00  VK0[km/s] 7.09013E+00 FB 2.66510E-01
+ LOW KICK:    I       584  NAME      2572  K*  14  VK[km/s]   7.09  VF[km/s]   6.47
+[R.0 GPU Pot.A] Ni 49993  NTOT 49993  pot(s) 0.026299
+[R.1 GPU Pot.A] Ni 49993  NTOT 49993  pot(s) 0.027145
+[R.0 GPU Reg.F ] Nsend 52  Ngrav 100  <Ni> 1124   send(s) 0.042212 grav(s) 0.140905  nb(s) 0.026838  out(s) 0.000000  Perf.(Gflops) 1244.494993
+[R.0 AVX Irr.F ] Ncall: 1853 <NI>: 13096 <NB>: 50.518256 grav: 0.429017 s, 3.393891 Gflops, 231.525799 usec
+
+ ADJUST:  TIME    8.00000E+01  T[Myr]    9.14  Q 0.52  DE   4.042E-07 DELTA   3.531E-08 DETOT   4.130E-02 E  -8.105E-02 EKIN   8.735E-02 POT   1.682E-01 ETIDE  -1.511E-04 ETOT  -1.094E-01 EBIN   0.000E+00 EMERGE   0.000E+00 ESUB   0.000E+00 ECOLL   0.000E+00 EMDOT  -2.738E-02 ECDOT  -9.625E-04
+
+  RMIN = 8.0E-05  DTMIN = 2.5E-06 RHOM = 8.3E+02 RSCALE = 2.5E+00 RSMIN = 8.8E-02  ECLOSE = 1.00  TC =   28
+  rank   PE   N        Total     Inti.    Intgrt      Reg.      Irr.   Predall     Pred.   Init.B.      Mdot      Move   Comm.I.   Comm.R.   Send.I.   Send.R.        KS    Adjust       OUT     Barr.   Barr.P.   Barr.I.   Barr.R. Reg.GPU.S Reg.GPU.P Comm.Adj. Mdot.Fic.  Mdot.Fc. Mdot.Pot.  Mdot.EC.   Sort.B.     HighV KS.Init.B  KS.Int.S  KS.Int.P  KS.Comm.  KS.Barr.   KS.Move   KS.Cmb. KS.Insert   ...[clipped]
+   0  2   49993   2900.69152      6.95   2727.32    367.07   1095.46     39.35     25.07     25.95     64.57    230.86     16.45     48.35    323.35     43.05     50.82    116.64    522.56     11.53     -0.00      6.97      0.97     59.36    242.94      0.00     21.77     40.92      0.00      0.00      6.00      0.09      0.02      0.10      0.00      0.00      0.00      0.00      0.00      0.00   ...[clipped]
+[R.1 GPU Reg.F ] Nsend 52  Ngrav 100  <Ni> 1124   send(s) 0.038875 grav(s) 0.141550  nb(s) 0.025200  out(s) 0.000000  Perf.(Gflops) 1238.761314
+[R.1 AVX Irr.F ] Ncall: 1853 <NI>: 13135 <NB>: 50.674935 grav: 0.431572 s, 3.383930 Gflops, 232.904715 usec
+
+           TIME   M/MT:  1.00E-03  3.00E-03  5.00E-03  1.00E-02  3.00E-02  5.00E-02  1.00E-01  2.00E-01  3.00E-01  4.00E-01  5.00E-01  6.00E-01  7.00E-01  8.00E-01  9.00E-01  9.50E-01  9.90E-01  1.00E+00       <RC
+     0.8000D+02 RLAGR:   1.34E-01  1.68E-01  1.95E-01  2.43E-01  3.68E-01  4.51E-01  6.11E-01  8.94E-01  1.17E+00  1.46E+00  1.82E+00  2.34E+00  3.18E+00  4.63E+00  1.17E+01  2.64E+01  4.65E+01  8.17E+01  4.49E-01
+     0.8000D+02 RSLAGR:   1.20E-01  1.47E-01  1.68E-01  2.04E-01  2.90E-01  3.42E-01  4.56E-01  6.20E-01  7.71E-01  9.14E-01  1.05E+00  1.19E+00  1.34E+00  1.49E+00  1.68E+00  1.79E+00  1.86E+00  1.89E+00
+     0.8000D+02 RBLAGR:   3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01  3.75E-01
+     0.8000D+02 AVMASS:  2.24E-05  3.16E-05  2.69E-05  3.48E-05  2.87E-05  2.94E-05  2.40E-05  1.96E-05  1.76E-05  1.83E-05  1.74E-05  1.74E-05  1.68E-05  1.75E-05  1.73E-05  2.01E-05  1.99E-05  1.76E-05  2.90E-05
+     0.8000D+02 NPARTC:        49        65        55       133       649       634      1923      4718      5258      5052      5325      5293      5517      5301      5335      2302      1859       525      1574
+     0.8000E+02 SIGR2:   1.52E-01  3.63E-02  6.00E-02  1.00E-01  9.73E-02  1.02E-01  9.74E-02  9.56E-02  9.14E-02  7.85E-02  7.96E-02  6.61E-02  5.82E-02  4.44E-02  2.98E-02  8.95E-03  7.66E-03  1.85E-02  1.01E-01
+     0.8000E+02 SIGT2:   1.22E-01  9.41E-02  1.50E-01  7.07E-02  1.11E-01  9.98E-02  1.09E-01  1.00E-01  8.68E-02  7.27E-02  6.22E-02  5.21E-02  4.28E-02  2.80E-02  1.37E-02  3.85E-03  3.22E-03  1.40E-02  1.07E-01
+     0.8000E+02 VROT:   -1.63E-01  1.70E-01  3.21E-02 -3.43E-02  1.26E-02 -1.86E-03  1.19E-03 -9.57E-03 -1.17E-04 -8.35E-03  2.18E-04  1.14E-02  5.76E-03 -2.70E-03  2.33E-03  3.01E-02  5.25E-02  9.32E-02  1.14E-02
+
+
+ TIME[NB]    8.000000E+01  N    49993  <NB>    34  NPAIRS       0  NMERGE     0 MULT    0 NS    49993  NSTEP(I,B,R,U)        905429        10732       115379            0  DE    0.404244E-06  E         -0.109392 M   0.92561882
+
+ NRUN =  1  M# =801  CPU = 4.83455E+01  TRC = 2.54120E+01  DMIN = 0.2E-05 0.1E+03 0.1E+03 0.1E+03  AMIN = 0.1E+03  RMAX = 0.0E+00  RSMIN = 0.09  NEFF =  6294
+
+    <R>  RTIDE  RDENS   RC      NC   MC   RHOD   RHOM  CMAX   <Cn>  Ir/R      UN      NP    RCM    VCM         AZ     EB/E   EM/E   TCR     T6  NESC  VRMS
+ #1 1.82  41.2   0.20  0.45   1574  0.046    0.     6.   24.  49.4  0.01       0       0    0.001  0.0003   0.013434 -0.000 -0.000 12.63     9     0   5.3
+
+             NBCORR      NBFULL      NBVOID      NICONV      NLSMIN      NBSMIN       NBDIS      NBDIS2      NCMDER       NFAST      NBFAST      NBLOCK      NBLCKR          NNPRED          NBFLUX
+ #2       53088           0           3          92           0           0           0           0           0           0           0        1853          52              65          370165
+
+        NKSTRY     NKSREG     NKSHYP     NKSPER  NKSMOD   NTTRY   NTRIP    NQUAD  NCHAIN     NMERG   NEWHI  NSTEPT  NSTEPQ  NSTEPC
+ #3          0          0          0          0       0       0       0        0        0        0       0       0       0       0
+
+        NMDOT NRG  NHE  NRS  NNH  NWD  NSN  NBH  NBS  ZMRG  ZMHE  ZMRS  ZMNH  ZMWD  ZMSN   ZMDOT  NTYPE
+ #4    34500    0   89   49   33    0    0   82    0   0.01540.4  21.2  28.6   0.0   0.0  2322.3  41022  8882   0   0   7   0   0   0   0   0   0    0      0      0     82
+
+      NDISS NTIDE  NSYNC  NCOLL  NCOAL  NDD  NCIRC  NROCHE  NRO  NCE  NHYP  NHYPC  NKICK  EBIN   EMERGE  ECOLL  EMDOT  ECDOT  EKICK  ESESC   EBESC  EMESC  DEGRAV   EBIND  MMAX
+ #5       0     0      0      0      0    0      0       0    0    0     0      0     38   0.000   0.000   0.000 -0.027 -0.001  0.000  0.000   0.000  0.000   0.000  -0.081  70.9
+ STEP I       42    1514    3009    2209    1717    2691    5150   13737   16220    2678     724     223      67      10       2
+ STEP R      878    5173    4260    6905   11246   12271    7678    1455     122       5
+ STEP U 
+ Max Speedup Irr:     4 3.99E+00    8 7.93E+00   16 1.56E+01   32 3.05E+01   64 5.77E+01  128 1.04E+02  256 1.72E+02  512 2.57E+02 1024 3.35E+02
+ Max Speedup Reg:     4 4.00E+00    8 7.99E+00   16 1.59E+01   32 3.17E+01   64 6.29E+01  128 1.23E+02  256 2.38E+02  512 4.42E+02 1024 7.70E+02
+  MYDUMP    79.999999999999730      80.0                        1001 comm.2_80.0                
+  W MYDUMP J,II,NPARTMP=        1001           1      300000       15000         800         512          22         600         200          10          10       10000  ntot,npairs,nttot=       49993           0           0  sum na+...+ns=      360897
+  NA-NS=          85         168         530        1203          24         132          99          40         216      320000       15872       22528
+Closing IRR_simd lib. CPU ver. - rank: 1
+
+
+         END RUN    TIME[Myr] =    9.14  TOFF/TIME/TTOT=      0.00000000     80.00000000     80.00000000  CPUTOT =   48.3  ERRTOT = 1.21443D-01  DETOT = 4.13021D-02
+
+
+        0 INTEGRATION INTERVAL =   80.00    NIRR=          0 NIRRB=      10732 NREG=          0 NKS=          0
+
+
+          PER TIME UNIT: NIRR= 0.00000D+00 NIRRB= 1.34150D+02 NREG= 0.00000D+00 NKS= 0.00000D+00
+Closing IRR_simd lib. CPU ver. - rank: 0
+  Total CPU=   2900.8141576869998     
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_DIVIDE_BY_ZERO IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_DIVIDE_BY_ZERO IEEE_OVERFLOW_FLAG IEEE_UNDERFLOW_FLAG IEEE_DENORMAL

@@ -1,6 +1,24 @@
-# The ten neutron stars of Run 4
+# The neutron stars of Run 4
 
-All values are read from `data/run4/pulsar.55_*.dat` by `scripts/make_star_docs.py`.
+The host forms eleven neutron stars (NSs) in Run 4; the module records ten of them. Formation and removal are taken from [`data/run4/host_neutron_stars.csv`](../data/run4/host_neutron_stars.csv) (kick lines of the host log and the escaper list `esc.11`):
+
+| NAME | Supernova (Myr) | M₀ (M☉) | M_NS (M☉) | Kick (km/s) | Speed after kick (km/s) | First record (Myr) | Removed (Myr) | at r (pc) | Records |
+|---|---|---|---|---|---|---|---|---|---|
+| 516 | 15.045 | 15.29 | 2.461 | 24.3 | 24.2 | 15.048 | 16.946 | 46.5 | 54 |
+| 517 | 16.598 | 14.21 | 1.999 | 18.3 | 19.5 | 16.630 | 18.985 | 46.1 | 67 |
+| 4 | 16.697 | 14.15 | 1.974 | 33.5 | 33.4 | 16.700 | 18.071 | 46.7 | 39 |
+| 518 | 16.936 | 14.01 | 1.916 | 21.6 | 22.9 | 16.946 | 18.915 | 46.6 | 56 |
+| 519 | 19.392 | 12.72 | 1.567 | 71.8 | 71.0 | 19.407 | 20.040 | 46.5 | 18 |
+| 5 | 20.831 | 12.11 | 1.489 | 33.8 | 33.1 | 20.849 | 22.185 | 45.9 | 38 |
+| 520 | 21.675 | 11.79 | 1.448 | 439.0 | 439.9 | 21.692 | 21.798 | 58.9 | 3 |
+| 521 | 22.476 | 11.51 | 1.412 | 211.1 | 212.2 | 22.501 | 22.712 | 51.3 | 6 |
+| 522 | 24.979 | 10.74 | 1.314 | 361.5 | 362.6 | – | 24.997 | 46.4 | 0 |
+| 6 | 26.506 | 10.34 | 1.278 | 413.7 | 414.4 | 26.509 | 26.615 | 46.1 | 3 |
+| 523 | 27.322 | 10.14 | 1.278 | 516.5 | 515.8 | 27.353 | 27.423 | 54.2 | 2 |
+
+NS 522 forms at least 39 pc from the centre, beyond the tidal radius, and is removed as an escaper at the next output, 0.019 Myr later, before the module is called. No other NS is present between 22.71 and 26.51 Myr, which is why no `pulsar.55` file exists for 23–25 Myr. The sections below describe the ten recorded NSs.
+
+All values below are read from `data/run4/pulsar.55_*.dat` by `scripts/make_star_docs.py`.
 Times are physical times in Myr; P in ms, Ṗ in s s⁻¹, B in G, distances in pc, speeds in km s⁻¹.
 E_bind is in M☉² pc⁻¹ and E_total in the mixed units described in [PULSAR55_FORMAT.md](PULSAR55_FORMAT.md). The meaning of the labels and of the changes of spin
 is discussed in Sects. 4 and 5 of the paper and in [MODULE_REVIEW.md](MODULE_REVIEW.md).
@@ -11,6 +29,7 @@ is discussed in Sects. 4 and 5 of the paper and in [MODULE_REVIEW.md](MODULE_REV
 - Records: 67, from 16.630 to 18.950 Myr (2.320 Myr)
 - Mean speed 19.3 km/s (range 19.22–19.48); distance from the centre 0.40 → 44.99 pc; E_total 369.3641 to 380.3031 (always > 0)
 - E_bind from -4.887 to -0.114 M☉² pc⁻¹
+- Host: supernova at 16.598 Myr (progenitor 14.21 M☉, NS 1.999 M☉), speed after the kick 19.5 km/s; removed as an escaper at 18.985 Myr, 46.1 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -42,6 +61,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS517_run4.png), [FigB](../figures/app
 - Records: 39, from 16.700 to 18.036 Myr (1.336 Myr)
 - Mean speed 33.3 km/s (range 33.29–33.39); distance from the centre 2.13 → 44.67 pc; E_total 1093.654 to 1100.841 (always > 0)
 - E_bind from -10.375 to -0.191 M☉² pc⁻¹
+- Host: supernova at 16.697 Myr (progenitor 14.15 M☉, NS 1.974 M☉), speed after the kick 33.4 km/s; removed as an escaper at 18.071 Myr, 46.7 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -71,6 +91,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS4_run4.png), [FigB](../figures/appen
 - Records: 54, from 15.048 to 16.911 Myr (1.863 Myr)
 - Mean speed 24.1 km/s (range 24.06–24.19); distance from the centre 2.46 → 45.17 pc; E_total 712.6297 to 720.729 (always > 0)
 - E_bind from -2.864 to 0.000 M☉² pc⁻¹
+- Host: supernova at 15.045 Myr (progenitor 15.29 M☉, NS 2.461 M☉), speed after the kick 24.2 km/s; removed as an escaper at 16.946 Myr, 46.5 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -100,6 +121,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS516_run4.png), [FigB](../figures/app
 - Records: 38, from 20.849 to 22.150 Myr (1.301 Myr)
 - Mean speed 33.0 km/s (range 32.83–33.09); distance from the centre 1.09 → 44.81 pc; E_total 802.842 to 815.6475 (always > 0)
 - E_bind from -7.022 to 0.000 M☉² pc⁻¹
+- Host: supernova at 20.831 Myr (progenitor 12.11 M☉, NS 1.489 M☉), speed after the kick 33.1 km/s; removed as an escaper at 22.185 Myr, 45.9 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -129,6 +151,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS5_run4.png), [FigB](../figures/appen
 - Records: 2, from 27.353 to 27.388 Myr (0.035 Myr)
 - Mean speed 515.5 km/s (range 515.54–515.54); distance from the centre 17.18 → 35.44 pc; E_total 169778.4 to 169778.8 (always > 0)
 - E_bind from -1.162 to -1.153 M☉² pc⁻¹
+- Host: supernova at 27.322 Myr (progenitor 10.14 M☉, NS 1.278 M☉), speed after the kick 515.8 km/s; removed as an escaper at 27.423 Myr, 54.2 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -149,6 +172,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS523_run4.png), [FigB](../figures/app
 - Records: 56, from 16.946 to 18.880 Myr (1.934 Myr)
 - Mean speed 22.8 km/s (range 22.77–22.91); distance from the centre 1.31 → 45.85 pc; E_total 496.5479 to 503.376 (always > 0)
 - E_bind from -2.896 to 0.000 M☉² pc⁻¹
+- Host: supernova at 16.936 Myr (progenitor 14.01 M☉, NS 1.916 M☉), speed after the kick 22.9 km/s; removed as an escaper at 18.915 Myr, 46.6 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -177,6 +201,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS518_run4.png), [FigB](../figures/app
 - Records: 6, from 22.501 to 22.677 Myr (0.176 Myr)
 - Mean speed 212.1 km/s (range 212.07–212.08); distance from the centre 6.12 → 43.92 pc; E_total 31760.47 to 31762.59 (always > 0)
 - E_bind from 0.000 to 0.000 M☉² pc⁻¹
+- Host: supernova at 22.476 Myr (progenitor 11.51 M☉, NS 1.412 M☉), speed after the kick 212.2 km/s; removed as an escaper at 22.712 Myr, 51.3 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -202,6 +227,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS521_run4.png), [FigB](../figures/app
 - Records: 18, from 19.407 to 20.005 Myr (0.598 Myr)
 - Mean speed 70.9 km/s (range 70.88–70.92); distance from the centre 0.72 → 43.53 pc; E_total 3935.109 to 3940.606 (always > 0)
 - E_bind from -1.448 to 0.000 M☉² pc⁻¹
+- Host: supernova at 19.392 Myr (progenitor 12.72 M☉, NS 1.567 M☉), speed after the kick 71.0 km/s; removed as an escaper at 20.040 Myr, 46.5 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -224,6 +250,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS519_run4.png), [FigB](../figures/app
 - Records: 3, from 26.509 to 26.579 Myr (0.070 Myr)
 - Mean speed 414.2 km/s (range 414.18–414.19); distance from the centre 1.42 → 30.92 pc; E_total 109583.4 to 109586 (always > 0)
 - E_bind from -0.150 to 0.000 M☉² pc⁻¹
+- Host: supernova at 26.506 Myr (progenitor 10.34 M☉, NS 1.278 M☉), speed after the kick 414.4 km/s; removed as an escaper at 26.615 Myr, 46.1 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|
@@ -246,6 +273,7 @@ Diagrams: [FigA](../figures/appendix/FigA_NS6_run4.png), [FigB](../figures/appen
 - Records: 3, from 21.692 to 21.763 Myr (0.070 Myr)
 - Mean speed 439.6 km/s (range 439.64–439.65); distance from the centre 9.27 → 42.65 pc; E_total 139966.9 to 139972.5 (always > 0)
 - E_bind from 0.000 to 0.000 M☉² pc⁻¹
+- Host: supernova at 21.675 Myr (progenitor 11.79 M☉, NS 1.448 M☉), speed after the kick 439.9 km/s; removed as an escaper at 21.798 Myr, 58.9 pc from the centre
 
 | Label | From (Myr) | To (Myr) | Records |
 |---|---|---|---|

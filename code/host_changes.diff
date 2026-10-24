@@ -1,0 +1,129 @@
+# Changes to the NBODY6++GPU host made for the pulsar module (Runs 2-4).
+# Unified diff of src/ in the stable tree (Nbody6PPGPU-beijing-stable) against the tree used for the runs
+# (Nbody6PPGPU-beijing-pulsars), restricted to the host files; the module itself is
+# calc_and_save_pulsar_params_v4_CORRECTED.f. Backup copies and compiler logs are omitted.
+
+diff -u stable/src/Main/file_init.F pulsars/src/Main/file_init.F
+--- stable/src/Main/file_init.F	2024-09-02 17:17:13.632200639 +0800
++++ pulsars/src/Main/file_init.F	2026-05-24 22:30:21.701589959 +0800
+@@ -71,7 +71,7 @@
+       FILE(45) = 'mbh.45    '
+       FILE(46) = 'mbhnb.46  '
+       FILE(54) = 'close.54  '
+-      FILE(55) = 'rpmax.55  '
++      FILE(55) = 'pulsar.55 '
+       FILE(71) = 'cirdiag.71'
+       FILE(73) = 'histab.73 '
+       FILE(75) = 'cirdiag.75'
+@@ -259,4 +259,40 @@
+ *     END DO
+ *
+       RETURN
++*
++*       Initialize pulsar evolution arrays (Maria Rah, May 2026).
++      DO I = 1,NMAX
++         PERIOD(I) = 0.0D0
++         PDOT(I) = 0.0D0
++         BMAG(I) = 0.0D0
++         P_INITIAL(I) = 0.0D0
++         B_INITIAL(I) = 0.0D0
++         XMNS0(I) = 0.0D0
++         AGEP0(I) = 0.0D0
++         BODY_PREV(I) = 0.0D0
++         R_PREV(I) = 0.0D0
++         E_BIND0(I) = 0.0D0
++         ACCRETION_TIME(I) = 0.0D0
++         EXCHANGE_TIME(I) = 0.0D0
++         MERGER_TIME(I) = 0.0D0
++         NAMEP0(I) = 0
++         KSTAR_COMP0(I) = 0
++         MERGERFLAG(I) = 0
++         DYNFLAG(I) = 0
++         WIDE_BINARY_FLAG(I) = 0
++         FIRST_CALL(I) = .TRUE.
++         MSPHISTORY(I) = .FALSE.
++      END DO
++*
++*       Set pulsar evolution coefficients from input.
++      XKFIELD = 0.0D0
++      XKACC = 2.0D-16
++      XKENV = 5.0D-29
++      XKDYN = 1.0D-22
++      XKASYM = 1.0D-27
++      XKGW = 1.0D-15
++      XKMERGE = 1.0D-10
++      XKTAU = 1.0D8
++      ATHRESH = 0.1D0
++*
+       END
+
+diff -u stable/src/Main/irr.avx.cpp pulsars/src/Main/irr.avx.cpp
+--- stable/src/Main/irr.avx.cpp	2026-05-08 03:11:22.595567235 +0800
++++ pulsars/src/Main/irr.avx.cpp	2026-05-19 20:20:16.666547123 +0800
+@@ -7,7 +7,7 @@
+ #include "vector3.h"
+ #include "simd_define.h"
+ 
+-#define NNBMAX 800
++#define NNBMAX 600
+ 
+ #define _out_
+ #define PROFILE
+
+diff -u stable/src/Main/irr.sse.cpp pulsars/src/Main/irr.sse.cpp
+--- stable/src/Main/irr.sse.cpp	2026-05-08 03:11:22.601567197 +0800
++++ pulsars/src/Main/irr.sse.cpp	2026-05-19 20:20:16.670547094 +0800
+@@ -8,7 +8,7 @@
+ #include "vector3.h"
+ #include "simd_define.h"
+ 
+-#define NNBMAX 800
++#define NNBMAX 600
+ 
+ #define _out_
+ #define PROFILE
+
+diff -u stable/src/Main/mdot.F pulsars/src/Main/mdot.F
+--- stable/src/Main/mdot.F	2024-09-02 17:17:13.440201880 +0800
++++ pulsars/src/Main/mdot.F	2026-05-04 22:40:22.235504544 +0800
+@@ -661,6 +661,7 @@
+                      DJTI = 0.D0
+                   ENDIF
+                   DJSPIN(K) = DJSPIN(K) - DJTI
++
+                   DJT = DJT + DJTI
+ *
+                ENDIF
+@@ -901,6 +902,14 @@
+                OSPIN(K) = 2.0D+08
+                JSPIN(K) = K3*RCC*RCC*MC*OSPIN(K)
+             ENDIF
++*       Call pulsar evolution subroutine for neutron stars (KW=13).
++            IF (KW.EQ.13) THEN
++               IF (XMNS0(I).EQ.0.0D0) THEN
++                  XMNS0(I) = BODY(I)
++                  AGE0(I) = TIME
++               END IF
++               CALL calc_and_save_pulsar_params(I)
++            END IF
+ *       Check inclusion of mass loss on type change.
+ *       Note DM should be zero if ICORR not already true and no SN.
+             DMS(K) = MASS(K) - M1
+
+diff -u stable/src/Main/output.F pulsars/src/Main/output.F
+--- stable/src/Main/output.F	2024-09-02 17:17:13.596200872 +0800
++++ pulsars/src/Main/output.F	2026-05-08 16:43:03.270152284 +0800
+@@ -569,6 +569,13 @@
+   100 TNEXT = TNEXT + DELTAT
+       ERROR = 0.0D0
+ *
++*       Call pulsar subroutine for all existing neutron stars.
++      DO I = 1, N
++         IF (KSTAR(I).EQ.13) THEN
++            CALL calc_and_save_pulsar_params(I)
++         END IF
++      END DO
++*
+       RETURN
+ *
+       END

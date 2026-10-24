@@ -1,6 +1,7 @@
 """Write docs/NEUTRON_STARS.md and figures/appendix/CAPTIONS.md from the Run 4 records.
 
-Every number in the two files is computed here from data/run4/pulsar.55_*.dat.
+Every number in the two files is computed here from data/run4/pulsar.55_*.dat, except the
+formation and removal data, which are read from data/run4/host_neutron_stars.csv (host log and esc.11).
 Usage:  python scripts/make_star_docs.py   (from the repository root)
 """
 import os
@@ -19,6 +20,14 @@ NAME = {1: "S1 (isolated pulsar)", 5: "S5 (wide binary)", 7: "S7 (NS–BH binary
 
 rec, _, _ = read_run(os.path.join(ROOT, "data", "run4"))
 stars = per_star(rec)
+
+HOST = {}
+for line in open(os.path.join(ROOT, "data", "run4", "host_neutron_stars.csv")):
+    if line.startswith("#") or line.startswith("NAME"):
+        continue
+    v = line.strip().split(",")
+    HOST[int(v[0])] = dict(t_sn=float(v[1]), m0=float(v[2]), mns=float(v[3]), vk=float(v[4]),
+                           vsn=float(v[5]), t1=v[6], t_rem=float(v[7]), r_rem=float(v[8]), n=int(v[10]))
 
 
 SUP = str.maketrans("-0123456789", "⁻⁰¹²³⁴⁵⁶⁷⁸⁹")
@@ -70,8 +79,23 @@ def states(s):
     return [(k, *seen[k]) for k in out]
 
 
-ns_md = ["# The ten neutron stars of Run 4", "",
-         "All values are read from `data/run4/pulsar.55_*.dat` by `scripts/make_star_docs.py`.",
+ns_md = ["# The neutron stars of Run 4", "",
+         "The host forms eleven neutron stars (NSs) in Run 4; the module records ten of them. Formation and removal "
+         "are taken from [`data/run4/host_neutron_stars.csv`](../data/run4/host_neutron_stars.csv) (kick lines of the "
+         "host log and the escaper list `esc.11`):", "",
+         "| NAME | Supernova (Myr) | M₀ (M☉) | M_NS (M☉) | Kick (km/s) | Speed after kick (km/s) | First record (Myr) "
+         "| Removed (Myr) | at r (pc) | Records |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
+for nm, h in sorted(HOST.items(), key=lambda kv: kv[1]["t_sn"]):
+    ns_md.append(f"| {nm} | {h['t_sn']:.3f} | {h['m0']:.2f} | {h['mns']:.3f} | {h['vk']:.1f} | {h['vsn']:.1f} | "
+                 f"{float(h['t1']):.3f} | {h['t_rem']:.3f} | {h['r_rem']:.1f} | {h['n']} |" if h["t1"] else
+                 f"| {nm} | {h['t_sn']:.3f} | {h['m0']:.2f} | {h['mns']:.3f} | {h['vk']:.1f} | {h['vsn']:.1f} | "
+                 f"– | {h['t_rem']:.3f} | {h['r_rem']:.1f} | 0 |")
+ns_md += ["",
+          "NS 522 forms at least 39 pc from the centre, beyond the tidal radius, and is removed as an escaper at the next "
+          "output, 0.019 Myr later, before the module is called. No other NS is present between 22.71 and 26.51 Myr, "
+          "which is why no `pulsar.55` file exists for 23–25 Myr. The sections below describe the ten recorded NSs.", "",
+         "All values below are read from `data/run4/pulsar.55_*.dat` by `scripts/make_star_docs.py`.",
          "Times are physical times in Myr; P in ms, Ṗ in s s⁻¹, B in G, distances in pc, speeds in km s⁻¹.",
          "E_bind is in M☉² pc⁻¹ and E_total in the mixed units described in "
          "[PULSAR55_FORMAT.md](PULSAR55_FORMAT.md). The meaning of the labels and of the changes of spin",
@@ -106,7 +130,10 @@ for k, (grp, name) in enumerate(ORDER, start=1):
               f"- Records: {len(s)}, from {s[0, 0]:.3f} to {s[-1, 0]:.3f} Myr ({s[-1, 0] - s[0, 0]:.3f} Myr)",
               f"- Mean speed {v.mean():.1f} km/s (range {v.min():.2f}–{v.max():.2f}); distance from the centre "
               f"{r[0]:.2f} → {r[-1]:.2f} pc; E_total {et.min():.7g} to {et.max():.7g} (always > 0)",
-              f"- E_bind from {eb.min():.3f} to {eb.max():.3f} M☉² pc⁻¹", "",
+              f"- E_bind from {eb.min():.3f} to {eb.max():.3f} M☉² pc⁻¹",
+              f"- Host: supernova at {HOST[name]['t_sn']:.3f} Myr (progenitor {HOST[name]['m0']:.2f} M☉, NS "
+              f"{HOST[name]['mns']:.3f} M☉), speed after the kick {HOST[name]['vsn']:.1f} km/s; removed as an escaper "
+              f"at {HOST[name]['t_rem']:.3f} Myr, {HOST[name]['r_rem']:.1f} pc from the centre", "",
               "| Label | From (Myr) | To (Myr) | Records |", "|---|---|---|---|"]
     ns_md += [f"| {NAME[lab]} | {t0:.3f} | {t1:.3f} | {n} |" for lab, t0, t1, n in segments(s)]
     ns_md += ["", "| P (ms) | Ṗ (s s⁻¹) | B (G) | τ_c (yr) | Below death line | From (Myr) | To (Myr) | Records |",
